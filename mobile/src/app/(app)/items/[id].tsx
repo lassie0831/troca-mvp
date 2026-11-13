@@ -169,7 +169,7 @@ function ProposeTrade({ item, preselectedId }: { item: Item; preselectedId?: str
           <Text style={styles.meta}>Qual item seu você oferece?</Text>
           <View style={styles.options}>
             {compatible.map((i) => (
-              <Chip key={i.id} label={`${i.title} · ${formatPrice(i.priceCents)}`} selected={i.id === offeredId} onPress={() => setSelected(i.id)} />
+              <Chip key={i.id} label={i.title} detail={formatPrice(i.priceCents)} selected={i.id === offeredId} onPress={() => setSelected(i.id)} />
             ))}
           </View>
           <TextField

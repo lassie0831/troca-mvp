@@ -72,16 +72,19 @@ export function TextField({ label, error, hint, ...props }: TextInputProps & { l
   );
 }
 
-export function Chip({ label, selected, onPress }: { label: string; selected?: boolean; onPress?: () => void }) {
+/** Pill button. `detail` (e.g. a price) is never truncated; only `label` shrinks when space is short. */
+export function Chip({ label, detail, selected, onPress }: { label: string; detail?: string; selected?: boolean; onPress?: () => void }) {
+  const textColor = selected && { color: '#fff' };
   return (
     <Pressable
       accessibilityRole="button"
       accessibilityState={{ selected }}
       onPress={onPress}
       style={[styles.chip, selected && { backgroundColor: colors.primary, borderColor: colors.primary }]}>
-      <Text style={[styles.chipText, selected && { color: '#fff' }]} numberOfLines={1}>
+      <Text style={[styles.chipText, { flexShrink: 1 }, textColor]} numberOfLines={1}>
         {label}
       </Text>
+      {detail ? <Text style={[styles.chipText, styles.chipDetail, textColor]}>{` · ${detail}`}</Text> : null}
     </Pressable>
   );
 }
@@ -184,9 +187,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
     backgroundColor: colors.card,
-    maxWidth: 220,
+    maxWidth: 300,
+    flexDirection: 'row',
   },
   chipText: { fontSize: 14, color: colors.text, fontWeight: '500' },
+  chipDetail: { fontWeight: '700', flexShrink: 0 },
   badge: { alignSelf: 'flex-start', paddingHorizontal: spacing.sm, paddingVertical: 2, borderRadius: radius.pill },
   badgeText: { fontSize: 12, fontWeight: '600' },
   empty: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: spacing.xl, gap: spacing.md },

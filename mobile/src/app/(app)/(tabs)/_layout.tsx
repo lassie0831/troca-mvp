@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Tabs } from 'expo-router';
 import type { ComponentProps } from 'react';
-import type { ColorValue } from 'react-native';
+import { Platform, type ColorValue } from 'react-native';
 import { colors } from '@/theme';
 
 type IconName = ComponentProps<typeof Ionicons>['name'];
@@ -18,6 +18,8 @@ export default function TabsLayout() {
         tabBarInactiveTintColor: colors.muted,
         headerTitleStyle: { fontWeight: '700' },
         sceneStyle: { backgroundColor: colors.background },
+        // Desktop browsers' font metrics clip the label at the default 49 px height.
+        tabBarStyle: Platform.OS === 'web' ? { height: 60, paddingBottom: 6 } : undefined,
       }}>
       <Tabs.Screen name="index" options={{ title: 'Trocas perto de você', tabBarLabel: 'Explorar', tabBarIcon: icon('swap-horizontal') }} />
       <Tabs.Screen name="my-items" options={{ title: 'Meus itens', tabBarIcon: icon('cube-outline') }} />

@@ -50,7 +50,8 @@ export default function FeedScreen() {
         {active.map((item) => (
           <Chip
             key={item.id}
-            label={`${item.title} · ${formatPrice(item.priceCents)}`}
+            label={item.title}
+            detail={formatPrice(item.priceCents)}
             selected={item.id === myItemId}
             onPress={() => setSelectedId(item.id)}
           />
