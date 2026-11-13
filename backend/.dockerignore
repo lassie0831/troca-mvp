@@ -1,0 +1,8 @@
+node_modules
+dist
+.test-dist
+uploads
+.env
+.env.*
+!.env.example
+test
